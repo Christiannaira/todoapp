@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { listItems, addItem } from "./services/itemServices";
+import { listItems, addItem, deleteItem } from "./services/itemServices";
 
 function App() {
 
@@ -18,6 +18,7 @@ function App() {
   // getting all items
   const getAllItems = () => {
 
+    // service
     listItems().then((res) => {
       // console.log(res.data);
       setItems(res.data);
@@ -31,11 +32,13 @@ function App() {
 
     if (validateItem(title, description)) {
 
+      // object to be sent to the backend
       const itemEntry = {
         taskTitle: title,
         taskDescription: description,
       };
 
+      // service
       addItem(itemEntry).then((res) => {
         alert("Successfully added an item");
         getAllItems();
@@ -52,15 +55,23 @@ function App() {
     return true;
   }
 
+  // deleting an item
+  const handleDeleteItem = (itemId) => {
+    deleteItem(itemId).then(() => {
+      alert("Successfully deleted an item");
+      getAllItems();
+    }).catch((err) => console.error(err));
+  }
+
   return (
     <>
       <div className="w-screen min-h-screen border p-5">
-        <h1>Hello World</h1>
         <div>
           {items.map((item, index) => (
-            <div key={index}>
+            <div key={index} className="flex flex-row gap-5">
               <h2>{item.taskTitle}</h2>
               <p>{item.taskDescription}</p>
+              <button onClick={() => handleDeleteItem(item.id)} className="py-2 px-3 bg-red-500 rounded-md cursor-pointer">Remove Item</button>
             </div>
           ))}
         </div>
