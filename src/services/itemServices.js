@@ -6,7 +6,7 @@ const REST_API_BASE_URL = "http://localhost:8080/items";
 export const addItem = (item) => axios.post(REST_API_BASE_URL, item);
 
 // deleting an item
-export const deleteItem = (itemId) => axios.post(REST_API_BASE_URL + "/" + itemId);
+export const deleteItem = (itemId) => axios.delete(REST_API_BASE_URL + "/" + itemId);
 
 // listing all items
 export const listItems = () => axios.get(REST_API_BASE_URL);
