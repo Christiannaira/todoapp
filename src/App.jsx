@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { listItems, addItem, deleteItem } from "./services/itemServices";
+import { HomePage } from "./components/pages/HomePage";
 
 function App() {
 
@@ -93,6 +94,7 @@ function App() {
 
       </div>
        */}
+       <HomePage/>
     </>
   )
 }
