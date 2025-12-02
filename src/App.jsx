@@ -65,7 +65,7 @@ function App() {
 
   return (
     <>
-      <div className="w-screen min-h-screen border p-5">
+      {/* <div className="w-screen min-h-screen border p-5">
         <div>
           {items.map((item, index) => (
             <div key={index} className="flex flex-row gap-5">
@@ -92,6 +92,7 @@ function App() {
         </div>
 
       </div>
+       */}
     </>
   )
 }
