@@ -1,6 +1,9 @@
 import { useState } from "react";
 import Dummy from "../../assets/dummyavatar.png";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
+import { FaRegCalendarCheck } from "react-icons/fa6";
+import { GoPlus } from "react-icons/go";
+
 
 
 export const HomeProfileCard = () => {
@@ -31,8 +34,18 @@ export const HomeProfileCard = () => {
                     </div>
                 </div>
                 {profileOption && (
-                    <div className="fixed top-33 right-10 bg-[#252525] w-70 max-w-full rounded-md py-2 px-4">
-                    asd 
+                    <div className="fixed top-33 right-10 bg-[#252525] w-70 max-w-full rounded-md py-5 px-4">
+
+                    <div className="flex items-center gap-3 cursor-pointer rounded-md hover:bg-[#202020] p-2 transition-all ease duration-100">
+                        <div className="p-2 bg-[#336AE0] rounded-md hover:bg-[#225DDC] transition-all ease duration-100">
+                            <GoPlus size={20} color="#ffffff"/>
+                        </div>
+                        <h3 className="text-[#f1f1f1]">Add task</h3>
+                    </div>
+                    {/* <h3>Today</h3>
+                    <h3>Upcoming</h3>
+                    <h3>Profile</h3>
+                    <h3>Logout</h3> */}
                 </div>
                 )}
 
