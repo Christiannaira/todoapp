@@ -58,7 +58,7 @@ export const TaskAdding = () => {
 
     return (
         <>
-            <div className='w-230 max-w-full max-h-130 overflow-y-scroll'>
+            <div className='w-230 max-w-full max-h-110 overflow-y-scroll px-5'>
                 <div className="flex flex-col gap-3">
                     <div>
                         <button className="bg-[#336AE0] rounded-md flex items-center justify-center gap-2 px-6 py-3 cursor-pointer hover:bg-[#225DDC] transition-all duration-100 ease text-sm">

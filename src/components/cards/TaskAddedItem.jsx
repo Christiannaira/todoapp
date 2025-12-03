@@ -6,7 +6,8 @@ export const TaskAddedItem = ({item}) => {
     
         <div>
             <div className='bg-[#242424] rounded-md relative px-6 py-5 flex flex-col gap-3 my-3'>
-                TaskAddedItem
+                <h3>{item.taskTitle}</h3>
+                <span>{item.taskDescription}</span>
             </div>
         </div>
     
