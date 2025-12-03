@@ -25,6 +25,10 @@ export const TaskAdding = () => {
                 getAllItems();
             }).catch((err) => console.error(err));
 
+            // emptying input fields
+            setTaskTitle("");
+            setTaskDescription("");
+
         } else {
             alert("Please enter your task title and task description")
         }
