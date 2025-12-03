@@ -28,7 +28,7 @@ export const TaskAdding = () => {
 
             // service
             addItem(itemEntry).then((res) => {
-                alert("Successfully added an item");
+                // alert("Successfully added an item");
                 getAllItems();
             }).catch((err) => console.error(err));
 
@@ -82,7 +82,7 @@ export const TaskAdding = () => {
 
                 {
                     allItems?.map((item, index) => (
-                        <TaskAddedItem key={index} item={item}/>
+                        <TaskAddedItem key={index} item={item} getAllItems={getAllItems}/>
 
                     ))
                 }
