@@ -1,11 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GoPlus } from "react-icons/go";
-import { addItem } from "../../services/itemServices";
+import { addItem, listItems } from "../../services/itemServices";
+import { TaskAddedItem } from "./TaskAddedItem";
 
 export const TaskAdding = () => {
 
     const [taskTitle, setTaskTitle] = useState("");
     const [taskDescription, setTaskDescription] = useState("");
+
+    const [allItems, setAllItems] = useState([]);
+
+    useEffect(() => {
+        getAllItems();
+    }, []);
 
     // adding an item
     const handleAddItem = (e) => {
@@ -41,9 +48,17 @@ export const TaskAdding = () => {
         return true;
     }
 
+    const getAllItems = () => {
+        listItems().then((res) => {
+            setAllItems(res.data);
+        }).catch((err) => {
+            console.error(err);
+        })
+    }
+
     return (
         <>
-            <div className='w-230 max-w-full'>
+            <div className='w-230 max-w-full max-h-130 overflow-y-scroll'>
                 <div className="flex flex-col gap-3">
                     <div>
                         <button className="bg-[#336AE0] rounded-md flex items-center justify-center gap-2 px-6 py-3 cursor-pointer hover:bg-[#225DDC] transition-all duration-100 ease text-sm">
@@ -64,6 +79,14 @@ export const TaskAdding = () => {
                     </form>
 
                 </div>
+
+                {
+                    allItems?.map((item, index) => (
+                        <TaskAddedItem key={index} item={item}/>
+
+                    ))
+                }
+
             </div>
         </>
     )
