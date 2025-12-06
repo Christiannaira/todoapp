@@ -37,6 +37,7 @@ export const TaskAdding = () => {
          // emptying input fields
          setTaskTitle("");
          setTaskDescription("");
+         setOpenAddTask(!openAddTask);
       } else {
          alert("Please enter your task title and task description");
       }
@@ -88,6 +89,17 @@ export const TaskAdding = () => {
                         onChange={(e) => setTaskDescription(e.target.value)}
                         value={taskDescription}
                      />
+
+                     <div>
+                        <ul>
+                           <li className="flex flex-col">
+                              <a href="">Priority Level</a>
+                              <a href="">Secondary Level</a>
+                              <a href="">Third Level</a>
+                           </li>
+                        </ul>
+                     </div>
+
                      <div>
                         <button
                            type="submit"
