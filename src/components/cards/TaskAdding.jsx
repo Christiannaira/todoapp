@@ -6,6 +6,9 @@ import { TaskAddedItem } from "./TaskAddedItem";
 export const TaskAdding = () => {
    const [taskTitle, setTaskTitle] = useState("");
    const [taskDescription, setTaskDescription] = useState("");
+   const [taskLevel, setTaskLevel] = useState("");
+   const [taskDueDate, setTaskDueDate] = useState("");
+   const [taskDueTime, setTaskDueTime] = useState("");
 
    const [allItems, setAllItems] = useState([]);
 
@@ -24,6 +27,9 @@ export const TaskAdding = () => {
          const itemEntry = {
             taskTitle,
             taskDescription,
+            priorityLevel: taskLevel,
+            dueDate: taskDueDate,
+            dueTime: taskDueTime,
          };
 
          // service
@@ -90,14 +96,54 @@ export const TaskAdding = () => {
                         value={taskDescription}
                      />
 
-                     <div>
+                     <div className="flex justify-between border">
                         <ul>
                            <li className="flex flex-col">
-                              <a href="">Priority Level</a>
-                              <a href="">Secondary Level</a>
-                              <a href="">Third Level</a>
+                              <button
+                                 type="button"
+                                 onClick={() => setTaskLevel("priority")}
+                              >
+                                 Priority Level
+                              </button>
+                              <button
+                                 type="button"
+                                 onClick={() => setTaskLevel("secondary")}
+                              >
+                                 Secondary Level
+                              </button>
+                              <button
+                                 type="button"
+                                 onClick={() => setTaskLevel("third")}
+                              >
+                                 Third Level
+                              </button>
                            </li>
                         </ul>
+                        <div>
+                           <div>
+                              <label htmlFor="dueDate">Due Date</label>
+                              <input
+                                 type="date"
+                                 id="dueDate"
+                                 name="dueDate"
+                                 value={taskDueDate}
+                                 onChange={(e) =>
+                                    setTaskDueDate(e.target.value)
+                                 }
+                              />
+                           </div>
+                           <div>
+                              <label htmlFor="eventTime">Due Time</label>
+                              <input
+                                 type="time"
+                                 id="eventTime"
+                                 name="eventTime"
+                                 onChange={(e) =>
+                                    setTaskDueTime(e.target.value)
+                                 }
+                              />
+                           </div>
+                        </div>
                      </div>
 
                      <div>
