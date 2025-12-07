@@ -123,7 +123,7 @@ export const TaskAdding = () => {
                      Add Task
                   </button>
                </div>
-               <form onSubmit={handleAddItem}>
+               {/* <form onSubmit={handleAddItem}>
                   <div className="bg-[#242424] rounded-md relative px-6 py-5 flex flex-col gap-3">
                      <input
                         type="text"
@@ -148,7 +148,7 @@ export const TaskAdding = () => {
                         </button>
                      </div>
                   </div>
-               </form>
+               </form> */}
             </div>
 
             {allItems?.map((item, index) => (
