@@ -96,29 +96,46 @@ export const TaskAdding = () => {
                         value={taskDescription}
                      />
 
-                     <div className="flex justify-between border">
-                        <ul className="p-2">
-                           <li className="relative">
+                     <div className="flex justify-between">
+                        <ul className="p-2 flex flex-col gap-2">
+                           <li className="relative cursor-pointer group">
+                              <div
+                                 className={`h-full w-6 absolute top-0 left-0 bg-red-500 rounded-sm group-hover:bg-red-500 group-hover:w-full rounded-sm transition-all duration-200 ease ${
+                                    taskLevel === "1" ? `w-full` : `w-6`
+                                 }`}
+                              />
                               <button
                                  type="button"
                                  onClick={() => setTaskLevel("1")}
-                                 className=""
+                                 className="pl-7 cursor-pointer relative z-1"
                               >
                                  Priority Level
                               </button>
                            </li>
-                           <li>
+                           <li className="relative cursor-pointer group">
+                              <div
+                                 className={`h-full w-6 absolute top-0 left-0 bg-green-500 rounded-sm group-hover:bg-green-500 group-hover:w-full rounded-sm transition-all duration-200 ease ${
+                                    taskLevel === "2" ? `w-full` : `w-6`
+                                 }`}
+                              />
                               <button
                                  type="button"
                                  onClick={() => setTaskLevel("2")}
+                                 className="pl-7 cursor-pointer relative z-1"
                               >
                                  Secondary Level
                               </button>
                            </li>
-                           <li>
+                           <li className="relative cursor-pointer group">
+                              <div
+                                 className={`h-full w-6 absolute top-0 left-0 bg-yellow-500 rounded-sm group-hover:bg-yellow-500 group-hover:w-full rounded-sm transition-all duration-200 ease ${
+                                    taskLevel === "3" ? `w-full` : `w-6`
+                                 }`}
+                              />
                               <button
                                  type="button"
                                  onClick={() => setTaskLevel("3")}
+                                 className="pl-7 cursor-pointer relative z-1"
                               >
                                  Third Level
                               </button>
