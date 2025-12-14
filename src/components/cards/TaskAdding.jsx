@@ -107,7 +107,11 @@ export const TaskAdding = () => {
                               <button
                                  type="button"
                                  onClick={() => setTaskLevel("1")}
-                                 className="pl-7 cursor-pointer relative z-1"
+                                 className={`pl-7 cursor-pointer relative z-1 font-semibold group-hover:text-white ${
+                                    taskLevel === "1"
+                                       ? `text-white`
+                                       : ` text-[#888888]`
+                                 }`}
                               >
                                  Priority Level
                               </button>
@@ -121,7 +125,11 @@ export const TaskAdding = () => {
                               <button
                                  type="button"
                                  onClick={() => setTaskLevel("2")}
-                                 className="pl-7 cursor-pointer relative z-1"
+                                 className={`pl-7 cursor-pointer relative z-1 font-semibold group-hover:text-white ${
+                                    taskLevel === "2"
+                                       ? `text-white`
+                                       : ` text-[#888888]`
+                                 }`}
                               >
                                  Secondary Level
                               </button>
@@ -135,15 +143,24 @@ export const TaskAdding = () => {
                               <button
                                  type="button"
                                  onClick={() => setTaskLevel("3")}
-                                 className="pl-7 cursor-pointer relative z-1"
+                                 className={`pl-7 cursor-pointer relative z-1 font-semibold group-hover:text-white ${
+                                    taskLevel === "3"
+                                       ? `text-white`
+                                       : ` text-[#888888]`
+                                 }`}
                               >
                                  Third Level
                               </button>
                            </li>
                         </ul>
-                        <div>
-                           <div>
-                              <label htmlFor="dueDate">Due Date</label>
+                        <div className="flex flex-col gap-3">
+                           <div className="flex flex-col gap-1">
+                              <label
+                                 htmlFor="dueDate"
+                                 className="text-[#888888] font-semibold"
+                              >
+                                 Due Date
+                              </label>
                               <input
                                  type="date"
                                  id="dueDate"
@@ -154,8 +171,13 @@ export const TaskAdding = () => {
                                  }
                               />
                            </div>
-                           <div>
-                              <label htmlFor="eventTime">Due Time</label>
+                           <div className="flex flex-col gap-1">
+                              <label
+                                 htmlFor="eventTime"
+                                 className="text-[#888888] font-semibold"
+                              >
+                                 Due Time
+                              </label>
                               <input
                                  type="time"
                                  id="eventTime"
