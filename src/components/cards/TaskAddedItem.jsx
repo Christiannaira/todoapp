@@ -10,6 +10,21 @@ export const TaskAddedItem = ({ item, getAllItems }) => {
          .catch((err) => console.error(err));
    };
 
+   const formattedDateTime = (date, time) => {
+      if (!date || !time) return "";
+
+      const dateTime = new Date(`${date}T${time}`);
+
+      return dateTime.toLocaleString("en-US", {
+         month: "long",
+         day: "numeric",
+         year: "numeric",
+         hour: "numeric",
+         minute: "2-digit",
+         hour12: true,
+      });
+   };
+
    return (
       <>
          <div>
@@ -27,6 +42,9 @@ export const TaskAddedItem = ({ item, getAllItems }) => {
                <span className="text-[#5B5B5B] text-md">
                   {item.taskDescription}
                </span>
+               <div className="text-[#5B5B5B] text-sm">
+                  {formattedDateTime(item.dueDate, item.dueTime)}
+               </div>
                <div
                   className="absolute top-5 right-5 cursor-pointer"
                   onClick={() => handleDeleteItem(item.id)}
