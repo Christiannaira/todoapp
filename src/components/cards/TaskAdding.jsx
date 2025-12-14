@@ -87,6 +87,7 @@ export const TaskAdding = () => {
                         className="text-xl p-1"
                         onChange={(e) => setTaskTitle(e.target.value)}
                         value={taskTitle}
+                        maxLength={255}
                      />
                      <input
                         type="text"
@@ -94,6 +95,7 @@ export const TaskAdding = () => {
                         className="text-[#5B5B5B] text-sm p-1"
                         onChange={(e) => setTaskDescription(e.target.value)}
                         value={taskDescription}
+                        maxLength={255}
                      />
 
                      <div className="flex justify-between">
