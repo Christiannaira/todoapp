@@ -97,23 +97,28 @@ export const TaskAdding = () => {
                      />
 
                      <div className="flex justify-between border">
-                        <ul>
-                           <li className="flex flex-col">
+                        <ul className="p-2">
+                           <li className="relative">
                               <button
                                  type="button"
-                                 onClick={() => setTaskLevel("priority")}
+                                 onClick={() => setTaskLevel("1")}
+                                 className=""
                               >
                                  Priority Level
                               </button>
+                           </li>
+                           <li>
                               <button
                                  type="button"
-                                 onClick={() => setTaskLevel("secondary")}
+                                 onClick={() => setTaskLevel("2")}
                               >
                                  Secondary Level
                               </button>
+                           </li>
+                           <li>
                               <button
                                  type="button"
-                                 onClick={() => setTaskLevel("third")}
+                                 onClick={() => setTaskLevel("3")}
                               >
                                  Third Level
                               </button>
