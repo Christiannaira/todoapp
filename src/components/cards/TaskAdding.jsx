@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { GoPlus } from "react-icons/go";
-import { addItem, listItems } from "../../services/itemServices";
+import { addItem, listItems, getItem } from "../../services/itemServices";
 import { TaskAddedItem } from "./TaskAddedItem";
 
 export const TaskAdding = () => {
@@ -13,6 +13,8 @@ export const TaskAdding = () => {
    const [allItems, setAllItems] = useState([]);
 
    const [openAddTask, setOpenAddTask] = useState(false);
+   const [openUpdateTask, setOpenUpdateTask] = useState(false);
+   const [currentItem, setCurrentItem] = useState(null);
 
    useEffect(() => {
       getAllItems();
@@ -22,30 +24,34 @@ export const TaskAdding = () => {
    const handleAddItem = (e) => {
       e.preventDefault();
 
-      if (validateItem(taskTitle, taskDescription)) {
-         // object to be sent to the backend
-         const itemEntry = {
-            taskTitle,
-            taskDescription,
-            priorityLevel: taskLevel,
-            dueDate: taskDueDate,
-            dueTime: taskDueTime,
-         };
-
-         // service
-         addItem(itemEntry)
-            .then((res) => {
-               // alert("Successfully added an item");
-               getAllItems();
-            })
-            .catch((err) => console.error(err));
-
-         // emptying input fields
-         setTaskTitle("");
-         setTaskDescription("");
-         setOpenAddTask(!openAddTask);
+      if (currentItem !== null) {
+         alert(currentItem);
       } else {
-         alert("Please enter your task title and task description");
+         if (validateItem(taskTitle, taskDescription)) {
+            // object to be sent to the backend
+            const itemEntry = {
+               taskTitle,
+               taskDescription,
+               priorityLevel: taskLevel,
+               dueDate: taskDueDate,
+               dueTime: taskDueTime,
+            };
+
+            // service
+            addItem(itemEntry)
+               .then((res) => {
+                  // alert("Successfully added an item");
+                  getAllItems();
+               })
+               .catch((err) => console.error(err));
+
+            // emptying input fields
+            setTaskTitle("");
+            setTaskDescription("");
+            setOpenAddTask(!openAddTask);
+         } else {
+            alert("Please enter your task title and task description");
+         }
       }
    };
 
@@ -69,8 +75,160 @@ export const TaskAdding = () => {
       setOpenAddTask(!openAddTask);
    };
 
+   const handleUpdateTask = (itemId) => {
+      setOpenAddTask(false);
+      setOpenUpdateTask(!openUpdateTask);
+      setCurrentItem(itemId);
+      // alert(itemId);
+      getItem(currentItem)
+         .then((res) => {
+            setTaskTitle(res.data.taskTitle);
+            setTaskDescription(res.data.taskDescription);
+            setTaskLevel(res.data.priorityLevel);
+            setTaskDueDate(res.data.dueDate);
+            setTaskDueTime(res.data.dueTime);
+         })
+         .catch((err) => console.error(err));
+   };
+
    return (
       <>
+         {/* for updating task */}
+         {openUpdateTask && (
+            <div
+               className="absolute w-full h-full bg-[#282828]/90 z-100"
+               onClick={() => setOpenUpdateTask(!openUpdateTask)}
+            />
+         )}
+         {openUpdateTask && (
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-200 w-240 max-w-full p-5">
+               <form onSubmit={handleAddItem}>
+                  <div className="bg-[#242424] rounded-md relative px-6 py-5 flex flex-col gap-3">
+                     <input
+                        type="text"
+                        placeholder="Create Task Title"
+                        className="text-xl p-1"
+                        onChange={(e) => setTaskTitle(e.target.value)}
+                        value={taskTitle}
+                        maxLength={255}
+                     />
+                     <input
+                        type="text"
+                        placeholder="Create Task Description"
+                        className="text-[#5B5B5B] text-sm p-1"
+                        onChange={(e) => setTaskDescription(e.target.value)}
+                        value={taskDescription}
+                        maxLength={255}
+                     />
+
+                     <div className="flex justify-between">
+                        <ul className="p-2 flex flex-col gap-2">
+                           <li className="relative cursor-pointer group">
+                              <div
+                                 className={`h-full w-6 absolute top-0 left-0 bg-red-500 rounded-sm group-hover:bg-red-500 group-hover:w-full rounded-sm transition-all duration-200 ease ${
+                                    taskLevel === "1" ? `w-full` : `w-6`
+                                 }`}
+                              />
+                              <button
+                                 type="button"
+                                 onClick={() => setTaskLevel("1")}
+                                 className={`pl-7 cursor-pointer relative z-1 font-semibold group-hover:text-white ${
+                                    taskLevel === "1"
+                                       ? `text-white`
+                                       : ` text-[#888888]`
+                                 }`}
+                              >
+                                 Priority Level
+                              </button>
+                           </li>
+                           <li className="relative cursor-pointer group">
+                              <div
+                                 className={`h-full w-6 absolute top-0 left-0 bg-green-500 rounded-sm group-hover:bg-green-500 group-hover:w-full rounded-sm transition-all duration-200 ease ${
+                                    taskLevel === "2" ? `w-full` : `w-6`
+                                 }`}
+                              />
+                              <button
+                                 type="button"
+                                 onClick={() => setTaskLevel("2")}
+                                 className={`pl-7 cursor-pointer relative z-1 font-semibold group-hover:text-white ${
+                                    taskLevel === "2"
+                                       ? `text-white`
+                                       : ` text-[#888888]`
+                                 }`}
+                              >
+                                 Secondary Level
+                              </button>
+                           </li>
+                           <li className="relative cursor-pointer group">
+                              <div
+                                 className={`h-full w-6 absolute top-0 left-0 bg-yellow-500 rounded-sm group-hover:bg-yellow-500 group-hover:w-full rounded-sm transition-all duration-200 ease ${
+                                    taskLevel === "3" ? `w-full` : `w-6`
+                                 }`}
+                              />
+                              <button
+                                 type="button"
+                                 onClick={() => setTaskLevel("3")}
+                                 className={`pl-7 cursor-pointer relative z-1 font-semibold group-hover:text-white ${
+                                    taskLevel === "3"
+                                       ? `text-white`
+                                       : ` text-[#888888]`
+                                 }`}
+                              >
+                                 Third Level
+                              </button>
+                           </li>
+                        </ul>
+                        <div className="flex flex-col gap-3">
+                           <div className="flex flex-col gap-1">
+                              <label
+                                 htmlFor="dueDate"
+                                 className="text-[#888888] font-semibold"
+                              >
+                                 Due Date
+                              </label>
+                              <input
+                                 type="date"
+                                 id="dueDate"
+                                 name="dueDate"
+                                 value={taskDueDate}
+                                 onChange={(e) =>
+                                    setTaskDueDate(e.target.value)
+                                 }
+                              />
+                           </div>
+                           <div className="flex flex-col gap-1">
+                              <label
+                                 htmlFor="eventTime"
+                                 className="text-[#888888] font-semibold"
+                              >
+                                 Due Time
+                              </label>
+                              <input
+                                 type="time"
+                                 id="eventTime"
+                                 name="eventTime"
+                                 onChange={(e) =>
+                                    setTaskDueTime(e.target.value)
+                                 }
+                              />
+                           </div>
+                        </div>
+                     </div>
+
+                     <div>
+                        <button
+                           type="submit"
+                           className="bg-[#336AE0] rounded-md px-4 py-1 cursor-pointer"
+                        >
+                           Create Task
+                        </button>
+                     </div>
+                  </div>
+               </form>
+            </div>
+         )}
+
+         {/* for adding a task */}
          {openAddTask && (
             <div
                className="absolute w-full h-full bg-[#282828]/90 z-100"
@@ -248,6 +406,7 @@ export const TaskAdding = () => {
                   key={index}
                   item={item}
                   getAllItems={getAllItems}
+                  handleUpdateTask={handleUpdateTask}
                />
             ))}
          </div>

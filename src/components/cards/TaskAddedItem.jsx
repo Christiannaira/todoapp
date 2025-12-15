@@ -1,7 +1,8 @@
 import { IoCloseOutline } from "react-icons/io5";
 import { deleteItem } from "../../services/itemServices";
+import { useState } from "react";
 
-export const TaskAddedItem = ({ item, getAllItems }) => {
+export const TaskAddedItem = ({ item, getAllItems, handleUpdateTask }) => {
    const handleDeleteItem = (id) => {
       deleteItem(id)
          .then((res) => {
@@ -25,9 +26,13 @@ export const TaskAddedItem = ({ item, getAllItems }) => {
       });
    };
 
+   const handleOpenUpdateTask = () => {
+      handleUpdateTask(item.id);
+   };
+
    return (
       <>
-         <div>
+         <div onClick={handleOpenUpdateTask}>
             <div className="bg-[#242424] rounded-md relative px-6 py-5 flex flex-col gap-3 my-3 cursor-pointer relative">
                <div
                   className={`absolute top-0 left-0 w-5 h-5 rounded-sm ${
